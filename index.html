@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QAZO - Fullstack Insano</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <title>WE ARE QAZO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,92 +12,124 @@
       box-sizing: border-box;
     }
 
-    body {
-      background: #0f0f0f;
-      color: #ffffff;
-      font-family: 'Orbitron', sans-serif;
+    html, body {
+      height: 100%;
+      font-family: 'Outfit', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     header {
       height: 100vh;
+      background: linear-gradient(135deg, #111, #000);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle, #1a1a1a, #0f0f0f);
-      text-align: center;
       position: relative;
       overflow: hidden;
     }
 
     header h1 {
-      font-size: 4rem;
-      letter-spacing: 0.2em;
+      font-size: 5rem;
+      font-family: 'Anton', sans-serif;
       color: #fff;
-      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      animation: fadeInUp 1s ease forwards;
     }
 
     header p {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: #ccc;
       margin-top: 20px;
-      z-index: 2;
+      max-width: 600px;
+      text-align: center;
+      animation: fadeInUp 2s ease forwards;
     }
 
     .glow {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 60%);
-      animation: pulse 6s infinite ease-in-out;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
+      animation: pulse 8s infinite ease-in-out;
+    }
+
+    .animated-bg {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: repeating-linear-gradient(45deg, #222 0 1px, #000 1px 20px);
+      opacity: 0.02;
+      animation: rotate 60s linear infinite;
+      z-index: 0;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.8; }
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.7; }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     section.features {
+      padding: 6rem 4rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 4rem;
-      background-color: #151515;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 3rem;
+      background: #0f0f0f;
+      position: relative;
     }
 
     .feature {
-      background: linear-gradient(145deg, #1c1c1c, #121212);
+      background: linear-gradient(145deg, #1b1b1b, #111);
       padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-      transition: transform 0.3s ease;
+      border-radius: 20px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 30px rgba(255,255,255,0.03);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
     }
 
-    .feature:hover {
-      transform: scale(1.05);
-    }
+    .feature:nth-child(2) { animation-delay: 0.6s; }
+    .feature:nth-child(3) { animation-delay: 0.9s; }
 
     .feature h2 {
-      font-size: 1.8rem;
       color: #fff;
+      font-size: 1.8rem;
       margin-bottom: 10px;
     }
 
     .feature p {
       color: #aaa;
+      line-height: 1.6;
     }
 
     .cta {
-      background: #0f0f0f;
+      background: #111;
+      padding: 6rem 2rem;
       text-align: center;
-      padding: 4rem 2rem;
     }
 
     .cta h2 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 1rem;
     }
 
@@ -105,12 +137,12 @@
       background: #fff;
       color: #000;
       border: none;
-      padding: 1rem 2rem;
-      border-radius: 30px;
-      font-weight: bold;
+      padding: 1rem 2.5rem;
+      border-radius: 40px;
       font-size: 1rem;
-      transition: all 0.3s ease;
+      font-weight: 700;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     .cta button:hover {
@@ -118,31 +150,11 @@
     }
 
     footer {
-      background: #1a1a1a;
-      color: #666;
+      background: #0a0a0a;
       padding: 2rem;
       text-align: center;
-    }
-
-    .animated-bg {
-      position: absolute;
-      width: 150%;
-      height: 150%;
-      top: -25%;
-      left: -25%;
-      background: repeating-linear-gradient(
-        45deg,
-        #222 0 1px,
-        #000 1px 20px
-      );
-      opacity: 0.02;
-      animation: rotate 60s linear infinite;
-      z-index: 1;
-    }
-
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      font-size: 0.9rem;
+      color: #555;
     }
   </style>
 </head>
@@ -150,32 +162,33 @@
   <header>
     <div class="glow"></div>
     <div class="animated-bg"></div>
-    <h1>QAZO</h1>
-    <p>Code Beyond Limits ⚡ Fullstack Insano</p>
+    <h1>WE ARE QAZO</h1>
+    <p>Somos uma startup insana de tecnologia que cria soluções web e mobile com design futurista e performance brutal. O futuro é nosso playground.</p>
   </header>
 
   <section class="features">
     <div class="feature">
-      <h2>Design Atemporal</h2>
-      <p>Minimalismo preto, cinza e branco. Sem firulas, só impacto visual e performance absurda.</p>
+      <h2>Fullstack sem Limites</h2>
+      <p>Do back-end ao front-end, nossa stack é atualizada com as tecnologias mais poderosas do mercado. Aplicações em Node, React, Next.js, MongoDB e muito mais.</p>
     </div>
     <div class="feature">
-      <h2>Experiência Interativa</h2>
-      <p>Efeitos visuais, animações, transições suaves e muito mais pra impressionar qualquer usuário.</p>
+      <h2>Design Interativo e Animado</h2>
+      <p>Criamos experiências únicas com animações envolventes, transições suaves e interações que surpreendem. Cada pixel respira tecnologia.</p>
     </div>
     <div class="feature">
-      <h2>Stack Moderna</h2>
-      <p>Node, React, Mongo, Tailwind, tudo otimizado para alta performance e escalabilidade real.</p>
+      <h2>Projetos que Falam por Si</h2>
+      <p>Sites, sistemas e apps que não só funcionam, mas IMPACTAM. Desenvolvemos com foco total em usabilidade, velocidade e escalabilidade.</p>
     </div>
   </section>
 
   <section class="cta">
-    <h2>Pronto pra elevar sua presença digital?</h2>
-    <button>Fale com a QAZO</button>
+    <h2>Quer um projeto nível QAZO?</h2>
+    <button>Vamos conversar</button>
   </section>
 
   <footer>
-    <p>&copy; 2025 QAZO. Todos os direitos reservados.</p>
+    <p>&copy; 2025 WE ARE QAZO. Revolucionando o digital, um byte de cada vez.</p>
   </footer>
+
 </body>
 </html>
