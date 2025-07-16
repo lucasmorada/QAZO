@@ -1,194 +1,739 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WE ARE QAZO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QAZO - Desenvolvimento sem Limites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: 'Nunito', sans-serif;
+        }
 
-    html, body {
-      height: 100%;
-      font-family: 'Outfit', sans-serif;
-      background: #0a0a0a;
-      color: #fff;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
+        body {
+            background: #0e0e0e;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-    header {
-      height: 100vh;
-      background: linear-gradient(135deg, #111, #000);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a, #1f004d);
+            position: relative;
+            padding: 4rem 2rem;
+            animation: fadeIn 1.2s ease forwards;
+        }
 
-    header h1 {
-      font-size: 5rem;
-      font-family: 'Anton', sans-serif;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      animation: fadeInUp 1s ease forwards;
-    }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #bc13fe, #00f3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    header p {
-      font-size: 1.4rem;
-      color: #ccc;
-      margin-top: 20px;
-      max-width: 600px;
-      text-align: center;
-      animation: fadeInUp 2s ease forwards;
-    }
+        .hero p {
+            max-width: 600px;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #d4d4d4;
+        }
 
-    .glow {
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
-      animation: pulse 8s infinite ease-in-out;
-    }
+        .cta-button {
+            background: #00f3ff;
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
 
-    .animated-bg {
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      background: repeating-linear-gradient(45deg, #222 0 1px, #000 1px 20px);
-      opacity: 0.02;
-      animation: rotate 60s linear infinite;
-      z-index: 0;
-    }
+        .cta-button:hover {
+            background: #bc13fe;
+            color: #fff;
+        }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 0.7; }
-    }
+        .social-media {
+            margin-top: 2rem;
+        }
 
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+        .social-icon {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: transform 0.3s;
+        }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: #00f3ff;
+        }
 
-    section.features {
-      padding: 6rem 4rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 3rem;
-      background: #0f0f0f;
-      position: relative;
-    }
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #999;
+            text-decoration: none;
+            animation: bounce 2s infinite;
+        }
 
-    .feature {
-      background: linear-gradient(145deg, #1b1b1b, #111);
-      padding: 2rem;
-      border-radius: 20px;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 30px rgba(255,255,255,0.03);
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-      animation-delay: 0.3s;
-    }
+        .scroll-down .mouse {
+            width: 24px;
+            height: 40px;
+            border: 2px solid #999;
+            border-radius: 50px;
+            position: relative;
+        }
 
-    .feature:nth-child(2) { animation-delay: 0.6s; }
-    .feature:nth-child(3) { animation-delay: 0.9s; }
+        .scroll-down .mouse::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: #999;
+            border-radius: 2px;
+            animation: scroll 1.5s infinite;
+        }
 
-    .feature h2 {
-      color: #fff;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
+        @keyframes scroll {
+            0% { opacity: 1; top: 8px; }
+            100% { opacity: 0; top: 24px; }
+        }
 
-    .feature p {
-      color: #aaa;
-      line-height: 1.6;
-    }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
 
-    .cta {
-      background: #111;
-      padding: 6rem 2rem;
-      text-align: center;
-    }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-    .cta h2 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }
+        section {
+            padding: 6rem 2rem;
+        }
 
-    .cta button {
-      background: #fff;
-      color: #000;
-      border: none;
-      padding: 1rem 2.5rem;
-      border-radius: 40px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 4rem;
+            color: #00f3ff;
+        }
 
-    .cta button:hover {
-      background: #ccc;
-    }
+        .services-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
 
-    footer {
-      background: #0a0a0a;
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #555;
-    }
-  </style>
+        .service-card, .project-card {
+            background: #1b1b1b;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover, .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .service-icon i, .project-tag {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #bc13fe;
+        }
+
+        .project-tag {
+            background: #222;
+            border-radius: 30px;
+            padding: 0.3rem 0.8rem;
+            display: inline-block;
+            margin: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        .project-image img {
+            width: 100%;
+            border-radius: 1rem;
+        }
+
+        .about {
+            background: linear-gradient(145deg, #141414, #1a0042);
+            color: #fff;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .about-text {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 1.5rem;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .about-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00f3ff;
+        }
+
+        .contact {
+            background: #111;
+        }
+
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .contact-form {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 1rem;
+            background: #1e1e1e;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .submit-button {
+            background: #00f3ff;
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #bc13fe;
+            color: #fff;
+        }
+
+        footer {
+            background: #0b0b0b;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #00f3ff;
+            text-decoration: none;
+        }
+
+        .footer-links, .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .footer-links a, .social-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover, .social-links a:hover {
+            color: #00f3ff;
+        }
+
+        .scroll-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #00f3ff;
+            color: #000;
+            border-radius: 50%;
+            padding: 0.8rem;
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+        }
+
+        .scroll-top.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="glow"></div>
-    <div class="animated-bg"></div>
-    <h1>WE ARE QAZO</h1>
-    <p>Somos uma startup insana de tecnologia que cria soluções web e mobile com design futurista e performance brutal. O futuro é nosso playground.</p>
-  </header>
 
-  <section class="features">
-    <div class="feature">
-      <h2>Fullstack sem Limites</h2>
-      <p>Do back-end ao front-end, nossa stack é atualizada com as tecnologias mais poderosas do mercado. Aplicações em Node, React, Next.js, MongoDB e muito mais.</p>
+  <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>DESENVOLVIMENTO<br>SEM LIMITES</h1>
+            <p>Na QAZO, transformamos ideias em realidade digital. Somos uma equipe full-stack apaixonada por criar soluções tecnológicas inovadoras e impactantes para o seu negócio.</p>
+            <a href="#contact" class="cta-button">COMEÇAR PROJETO</a>
+        </div>
+        
+        <div class="social-media">
+            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        </div>
+        
+        <a href="#services" class="scroll-down">
+            <div class="mouse"></div>
+            <span>Scroll Down</span>
+        </a>
+    </section>
+    
+    <section class="services" id="services">
+        <h2 class="section-title">NOSSOS SERVIÇOS</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-code"></i></div>
+                <h3>Desenvolvimento Web</h3>
+                <p>Criação de sites e aplicações web customizadas, responsivas e de alta performance utilizando as tecnologias mais modernas.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Desenvolvimento Mobile</h3>
+                <p>Aplicativos nativos e híbridos para iOS e Android, focados em experiência do usuário e desempenho excepcional.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-server"></i></div>
+                <h3>Backend & APIs</h3>
+                <p>Desenvolvimento de APIs robustas e escaláveis, arquitetura de bancos de dados e soluções server-side.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-cloud"></i></div>
+                <h3>Cloud Computing</h3>
+                <p>Implementação, migração e gestão de soluções em cloud para otimizar sua infraestrutura tecnológica.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>UI/UX Design</h3>
+                <p>Design de interfaces intuitivas e belas, com foco na experiência do usuário e nos objetivos do negócio.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-robot"></i></div>
+                <h3>Inteligência Artificial</h3>
+                <p>Soluções customizadas de IA e machine learning para automação, análise de dados e processos inteligentes.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>QUEM SOMOS</h2>
+                <p>A QAZO nasceu da paixão por tecnologia e inovação. Somos uma equipe de desenvolvedores full-stack especializados em criar soluções digitais que impulsionam negócios e resolvem problemas complexos.</p>
+                <p>Combinamos expertise técnica com criatividade para entregar produtos finais que são tão funcionais quanto bonitos. Nosso objetivo é sempre ultrapassar as expectativas dos nossos clientes.</p>
+                
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Projetos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Anos de Experiência</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Clientes Satisfeitos</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-image">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c454c50d-26ff-4a94-9920-d7994780ac96.png" alt="Equipe QAZO desenvolvendo soluções tecnológicas em um escritório moderno com computadores e dispositivos inteligentes">
+            </div>
+        </div>
+    </section>
+    
+    <section class="projects" id="projects">
+        <h2 class="section-title">NOSSOS PROJETOS</h2>
+        
+        <div class="projects-slider">
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9291f32a-7eb8-4031-b371-d830c3af318c.png" alt="Dashboard de análise de dados com gráficos interativos e visualização moderna">
+                        <div class="project-tags">
+                            <span class="project-tag">Web</span>
+                            <span class="project-tag">Dashboard</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Sistema de Análise de Dados</h3>
+                        <p>Dashboard completo para análise e visualização de dados em tempo real com gráficos interativos e relatórios personalizáveis.</p>
+                        <a href="#" class="project-link">Ver projeto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c0d67e4b-6a9b-4cba-a85e-be6cce196000.png" alt="Aplicativo móvel de e-commerce com interface moderna e fluida">
+                        <div class="project-tags">
+                            <span class="project-tag">Mobile</span>
+                            <span class="project-tag">E-commerce</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Aplicativo de E-commerce</h3>
+                        <p>Solução completa de compras mobile com pagamentos integrados, catálogo de produtos e experiência de usuário premium.</p>
+                        <a href="#" class="project-link">Ver projeto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8341383f-d296-4bcb-8f19-0f2c4d370d7c.png" alt="Sistema de gestão empresarial com múltiplos módulos integrados">
+                        <div class="project-tags">
+                            <span class="project-tag">ERP</span>
+                            <span class="project-tag">Gestão</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Sistema ERP Customizado</h3>
+                        <p>Solução abrangente de gestão empresarial desenvolvida sob medida para as necessidades específicas do cliente.</p>
+                        <a href="#" class="project-link">Ver projeto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Entre em Contato</h2>
+                <p>Pronto para transformar sua ideia em realidade? Entre em contato conosco para discussão inicial sem compromisso sobre seu projeto.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@qazo.com</span>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+55 (11) 99999-9999</span>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>São Paulo, Brasil</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <input type="text" id="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">ENVIAR MENSAGEM</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="footer-logo">QAZO</a>
+            
+            <div class="footer-links">
+                <a href="#home">Início</a>
+                <a href="#services">Serviços</a>
+                <a href="#about">Sobre</a>
+                <a href="#projects">Projetos</a>
+                <a href="#contact">Contato</a>
+                <a href="#">Blog</a>
+                <a href="#">Termos</a>
+                <a href="#">Privacidade</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            
+            <p class="copyright">© 2023 QAZO Tecnologia. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
     </div>
-    <div class="feature">
-      <h2>Design Interativo e Animado</h2>
-      <p>Criamos experiências únicas com animações envolventes, transições suaves e interações que surpreendem. Cada pixel respira tecnologia.</p>
-    </div>
-    <div class="feature">
-      <h2>Projetos que Falam por Si</h2>
-      <p>Sites, sistemas e apps que não só funcionam, mas IMPACTAM. Desenvolvemos com foco total em usabilidade, velocidade e escalabilidade.</p>
-    </div>
-  </section>
-
-  <section class="cta">
-    <h2>Quer um projeto nível QAZO?</h2>
-    <button>Vamos conversar</button>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 WE ARE QAZO. Revolucionando o digital, um byte de cada vez.</p>
-  </footer>
-
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js config
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#bc13fe", "#00f3ff", "#006eff"]
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#bc13fe",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '1rem 5%';
+                header.style.background = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                header.style.padding = '1.5rem 5%';
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+            }
+        });
+        
+        // Scroll to top button
+        const scrollTop = document.querySelector('.scroll-top');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('active');
+            } else {
+                scrollTop.classList.remove('active');
+            }
+        });
+        
+        scrollTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.service-card, .about-image, .project-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Initial check
+            animateOnScroll();
+            
+            // Event listener
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Set initial styles
+            const serviceCards = document.querySelectorAll('.service-card');
+            const projects = document.querySelectorAll('.project-card');
+            
+            serviceCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = all 0.5s ease ${index * 0.1}s;
+            });
+            
+            projects.forEach((project, index) => {
+                project.style.opacity = '0';
+                project.style.transform = 'translateY(50px)';
+                project.style.transition = all 0.5s ease ${index * 0.1}s;
+            });
+            
+            const aboutImage = document.querySelector('.about-image img');
+            aboutImage.style.opacity = '0';
+            aboutImage.style.transform = 'rotateY(30deg)';
+            aboutImage.style.transition = 'all 0.5s ease 0.2s';
+        });
+    </script>
 </body>
 </html>
+
