@@ -1,211 +1,181 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QAZO - Fullstack Insano</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {margin:0;padding:0;box-sizing:border-box;}
-    html, body {
-      height: 100%;
-      background: #0a0a0a;
-      font-family: 'Inter', sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: #ffffff;
+      font-family: 'Orbitron', sans-serif;
       overflow-x: hidden;
-      cursor: none;
     }
-    canvas#particles {
-      position: fixed;
-      top: 0; left: 0;
-      z-index: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.05), transparent 200px);
-      z-index: 1;
-      pointer-events: none;
-    }
-    .cursor {
-      width: 20px;
-      height: 20px;
-      background: white;
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      mix-blend-mode: difference;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-    }
+
     header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: #111;
-      padding: 1.5rem 4rem;
+      height: 100vh;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-    }
-    header h1 {
-      font-size: 2rem;
-      letter-spacing: 3px;
-    }
-    nav a {
-      margin-left: 2rem;
-      color: #ccc;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      color: white;
-    }
-    .hero {
-      min-height: 100vh;
-      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      background: radial-gradient(circle, #1a1a1a, #0f0f0f);
       text-align: center;
-      z-index: 2;
       position: relative;
+      overflow: hidden;
     }
-    .hero h2 {
+
+    header h1 {
       font-size: 4rem;
-      background: linear-gradient(45deg, white, gray);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glitch 2s infinite;
-    }
-    .hero p {
-      color: #aaa;
-      max-width: 600px;
-      margin-top: 1rem;
-    }
-    @keyframes glitch {
-      0% {transform: translate(0,0)}
-      20% {transform: translate(-2px,2px)}
-      40% {transform: translate(2px,-2px)}
-      60% {transform: translate(-1px,1px)}
-      80% {transform: translate(1px,-1px)}
-      100% {transform: translate(0,0)}
-    }
-    section {
-      padding: 6rem 4rem;
-      color: white;
+      letter-spacing: 0.2em;
+      color: #fff;
       z-index: 2;
-      position: relative;
     }
-    .cards {
+
+    header p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-top: 20px;
+      z-index: 2;
+    }
+
+    .glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 60%);
+      animation: pulse 6s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    section.features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      margin-top: 2rem;
+      padding: 4rem;
+      background-color: #151515;
     }
-    .card {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(8px);
+
+    .feature {
+      background: linear-gradient(145deg, #1c1c1c, #121212);
       padding: 2rem;
-      border-radius: 20px;
-      transition: 0.3s;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease;
     }
-    .card:hover {
+
+    .feature:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(255,255,255,0.1);
     }
-    .footer {
+
+    .feature h2 {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #aaa;
+    }
+
+    .cta {
+      background: #0f0f0f;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta button {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .cta button:hover {
+      background: #ccc;
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: #666;
       padding: 2rem;
       text-align: center;
-      background: #000;
-      color: #666;
+    }
+
+    .animated-bg {
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      background: repeating-linear-gradient(
+        45deg,
+        #222 0 1px,
+        #000 1px 20px
+      );
+      opacity: 0.02;
+      animation: rotate 60s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
-  <canvas id="particles"></canvas>
-  <div class="cursor" id="cursor"></div>
   <header>
+    <div class="glow"></div>
+    <div class="animated-bg"></div>
     <h1>QAZO</h1>
-    <nav>
-      <a href="#servicos">Serviços</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#contato">Contato</a>
-    </nav>
+    <p>Code Beyond Limits ⚡ Fullstack Insano</p>
   </header>
-  <section class="hero">
-    <h2 data-text="Somos a QAZO">Somos a QAZO</h2>
-    <p>Fullstack insano. Sites, sistemas, automações. Tudo que sua empresa precisa pra dominar o digital.</p>
-  </section>
-  <section id="servicos">
-    <h2>O que fazemos</h2>
-    <div class="cards">
-      <div class="card"><h3>Sites Interativos</h3><p>Feitos sob medida, rápidos e responsivos.</p></div>
-      <div class="card"><h3>Sistemas Inteligentes</h3><p>Painéis, integrações com IA, automações.</p></div>
-      <div class="card"><h3>APIs & Backend</h3><p>Infra robusta, segura e escalável com Node.js.</p></div>
+
+  <section class="features">
+    <div class="feature">
+      <h2>Design Atemporal</h2>
+      <p>Minimalismo preto, cinza e branco. Sem firulas, só impacto visual e performance absurda.</p>
+    </div>
+    <div class="feature">
+      <h2>Experiência Interativa</h2>
+      <p>Efeitos visuais, animações, transições suaves e muito mais pra impressionar qualquer usuário.</p>
+    </div>
+    <div class="feature">
+      <h2>Stack Moderna</h2>
+      <p>Node, React, Mongo, Tailwind, tudo otimizado para alta performance e escalabilidade real.</p>
     </div>
   </section>
-  <section id="sobre">
-    <h2>Quem somos</h2>
-    <p style="max-width: 600px; margin: auto; text-align: center;">Somos a QAZO, uma empresa criada pra fazer diferente. A gente une código limpo, design futurista e performance em tudo o que toca. Aqui, você não recebe só um sistema. Recebe tecnologia de verdade.</p>
+
+  <section class="cta">
+    <h2>Pronto pra elevar sua presença digital?</h2>
+    <button>Fale com a QAZO</button>
   </section>
-  <section id="contato">
-    <h2>Contato</h2>
-    <p style="text-align:center">Fale com a gente: <a href="mailto:contato@qazo.dev" style="color:#fff;text-decoration:underline">contato@qazo.dev</a></p>
-  </section>
-  <footer class="footer">© 2025 QAZO. Todos os direitos reservados.</footer>
 
-  <script>
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let W = window.innerWidth;
-    let H = window.innerHeight;
-    canvas.width = W;
-    canvas.height = H;
-
-    let particles = [];
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5
-      });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#aaa';
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-        if (p.y < 0 || p.y > H) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-    draw();
-
-    window.addEventListener('resize', () => {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    });
-
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      document.body.style.setProperty('--x', e.clientX + 'px');
-      document.body.style.setProperty('--y', e.clientY + 'px');
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-  </script>
+  <footer>
+    <p>&copy; 2025 QAZO. Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
