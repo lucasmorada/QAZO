@@ -1,186 +1,888 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QAZO</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle at top left, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      overflow-x: hidden;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      position: fixed;
-      width: 100%;
-      z-index: 1000;
-      background: transparent;
-    }
-    .icons a {
-      color: #0ff;
-      font-size: 20px;
-      margin-left: 20px;
-      transition: transform 0.3s ease;
-    }
-    .icons a:hover {
-      transform: scale(1.3);
-      color: #fff;
-    }
-    .intro {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      overflow: hidden;
-    }
-    .intro h1 span {
-      display: block;
-      font-size: 4rem;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: riseUp 0.8s ease forwards;
-    }
-    .intro h1 span:nth-child(1) { animation-delay: 0.2s; }
-    .intro h1 span:nth-child(2) { animation-delay: 0.7s; }
-    .intro h1 span:nth-child(3) { animation-delay: 1.2s; }
-
-    @keyframes riseUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .terminal {
-      background: #000;
-      color: #0f0;
-      font-family: monospace;
-      padding: 20px;
-      width: 90%;
-      max-width: 900px;
-      margin: 0 auto;
-      margin-top: 40px;
-      box-shadow: 0 0 30px rgba(0,255,0,0.2);
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    .about {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-      line-height: 1.7;
-      animation: fadeIn 2s ease-in-out;
-    }
-    .about h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #0ff;
-    }
-    .about p {
-      margin-bottom: 20px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .floating-code {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      font-size: 14px;
-      color: #0ff;
-      animation: moveAround 20s linear infinite;
-      opacity: 0.2;
-      white-space: pre;
-    }
-
-    @keyframes moveAround {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QAZO | Inovação em Desenvolvimento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #1a1a1a;
+            --accent: #ffffff;
+            --text: #e0e0e0;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent) }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .animate-slide-in {
+            animation: slideIn 1s ease-out forwards;
+        }
+        
+        .typing-animation {
+            overflow: hidden;
+            border-right: .15em solid var(--accent);
+            white-space: nowrap;
+            animation: 
+                typing 3.5s steps(40, end) forwards,
+                blink-caret .75s step-end infinite;
+        }
+        
+        .code-editor {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .code-editor:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+        
+        .code-header {
+            height: 30px;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 6px;
+        }
+        
+        .code-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+        
+        .code-body {
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.5;
+            font-size: 14px;
+            min-height: 200px;
+        }
+        
+        .token.comment { color: #6A9955; }
+        .token.keyword { color: #569CD6; }
+        .token.string { color: #CE9178; }
+        .token.function { color: #DCDCAA; }
+        .token.number { color: #B5CEA8; }
+        
+        .tech-card {
+            background: var(--secondary);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tech-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background: #222;
+        }
+        
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            bottom: 0;
+            left: -100%;
+            transition: left 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            left: 0;
+        }
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #ffffff, #aaaaaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <div></div>
-    <div class="icons">
-      <a href="#"><i class="fab fa-github"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="mailto:contato@qazo.dev"><i class="fas fa-envelope"></i></a>
+<body class="antialiased">
+    <!-- Animated Background Elements -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        <div class="absolute top-20 left-10 w-3 h-3 rounded-full bg-white animate-pulse" style="animation-delay: 0.5s;"></div>
+        <div class="absolute top-1/3 right-20 w-4 h-4 rounded-full bg-gray-500 animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-20 left-1/4 w-2 h-2 rounded-full bg-gray-400 animate-pulse" style="animation-delay: 1.5s;"></div>
+        <div class="absolute top-2/3 right-1/3 w-3 h-3 rounded-full bg-white animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <!-- Animated Circuit Lines -->
+        <svg class="absolute top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,100 Q250,50 500,200 T1000,100" stroke="rgba(255,255,255,0.05)" stroke-width="2" fill="none" 
+                  stroke-dasharray="10,5" stroke-dashoffset="0">
+                <animate attributeName="stroke-dashoffset" from="0" to="1000" dur="60s" repeatCount="indefinite"/>
+            </path>
+            <path d="M100,600 Q200,400 400,500 T800,600" stroke="rgba(255,255,255,0.03)" stroke-width="2" fill="none" 
+                  stroke-dasharray="10,5" stroke-dashoffset="0">
+                <animate attributeName="stroke-dashoffset" from="1000" to="0" dur="45s" repeatCount="indefinite"/>
+            </path>
+        </svg>
     </div>
-  </header>
-
-  <section class="intro">
-    <h1>
-      <span>WE</span>
-      <span>ARE</span>
-      <span>QAZO</span>
-    </h1>
-  </section>
-
-  <section class="terminal">
-    <pre id="code"></pre>
-  </section>
-
-  <section class="about">
-    <h2>O que fazemos</h2>
-    <p>Na QAZO, unimos tecnologia, design e ousadia para criar soluções digitais fora do comum. Nossa especialidade vai além do código: entregamos experiências. Desenvolvemos plataformas web completas, sistemas inteligentes e interfaces que brilham.</p>
-    <p>Com uma equipe apaixonada por inovação, transformamos ideias em produtos funcionais e impactantes. Usamos tecnologias modernas, interfaces animadas e integrações inteligentes com foco total no usuário.</p>
-    <p>De startups ambiciosas a grandes empresas, ajudamos nossos clientes a se destacarem no mundo digital com soluções ágeis, bonitas e escaláveis.</p>
-    <p>Somos programadores, mas acima de tudo, somos visionários. Se você pode imaginar, nós podemos codar.</p>
-  </section>
-
-  <div class="floating-code">
-    const QAZO = () => {
-      return 'INOVAÇÃO & CÓDIGO';
-    }
-  </div>
-
-  <script>
-    const codeEl = document.getElementById("code");
-    const code = `function criarInovacao() {
-  const ideias = capturarIdeias();
-  const equipe = ['dev', 'designer', 'estrategista'];
-  ideias.forEach(ideia => {
-    equipe.forEach(pessoa => {
-      pessoa.executar(ideia);
-    });
-  });
-  return projetoIncrivel;
-}`;
-
-    let index = 0;
-    function typeCode() {
-      if (index < code.length) {
-        codeEl.textContent += code.charAt(index);
-        index++;
-        setTimeout(typeCode, 30);
-      }
-    }
-    typeCode();
-  </script>
+    
+    <div class="relative z-10">
+        <!-- Navigation -->
+        <nav class="container mx-auto px-6 py-8">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-text animate-float">QAZO</div>
+                <div class="hidden md:flex space-x-12">
+                    <a href="#services" class="nav-link text-white hover:text-gray-300 transition-colors">Serviços</a>
+                    <a href="#projects" class="nav-link text-white hover:text-gray-300 transition-colors">Projetos</a>
+                    <a href="#process" class="nav-link text-white hover:text-gray-300 transition-colors">Processo</a>
+                    <a href="#team" class="nav-link text-white hover:text-gray-300 transition-colors">Time</a>
+                    <a href="#contact" class="nav-link text-white hover:text-gray-300 transition-colors">Contato</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-white hover:text-gray-300 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden bg-black bg-opacity-90 absolute top-24 left-0 right-0 z-20 p-6 rounded-lg shadow-xl">
+                <div class="flex flex-col space-y-4">
+                    <a href="#services" class="text-white hover:text-gray-300 transition-colors">Serviços</a>
+                    <a href="#projects" class="text-white hover:text-gray-300 transition-colors">Projetos</a>
+                    <a href="#process" class="text-white hover:text-gray-300 transition-colors">Processo</a>
+                    <a href="#team" class="text-white hover:text-gray-300 transition-colors">Time</a>
+                    <a href="#contact" class="text-white hover:text-gray-300 transition-colors">Contato</a>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden px-6">
+            <div class="container mx-auto text-center">
+                <h1 class="text-5xl md:text-7xl font-bold mb-8 animate-slide-in" style="animation-delay: 0.3s;">
+                    <span class="gradient-text">WE ARE QAZO</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 scroll-animate" style="animation-delay: 0.6s;">
+                    Transformando ideias em realidade digital com soluções inovadoras de front-end, back-end e integração com IA.
+                </p>
+                
+                <!-- Animated Code Editor -->
+                <div class="max-w-4xl mx-auto scroll-animate code-editor" style="animation-delay: 0.9s;">
+                    <div class="code-header">
+                        <div class="code-btn red"></div>
+                        <div class="code-btn yellow"></div>
+                        <div class="code-btn green"></div>
+                    </div>
+                    <div class="code-body">
+                        <div class="typing-animation">
+                            // Inovação em cada linha de código
+                        </div>
+                        <div style="margin-top: 10px;"></div>
+                        <span class="token keyword">const</span> <span class="token function">createFuture</span> = () <span class="token keyword">=></span> {<br>
+                            &nbsp;&nbsp;<span class="token keyword">return</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;frontend: <span class="token string">"React, Next.js, Vue"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;backend: <span class="token string">"Node.js, Python, Go"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;ai: <span class="token string">"Machine Learning, NLP, Computer Vision"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;database: <span class="token string">"MongoDB, PostgreSQL, Firebase"</span><br>
+                            &nbsp;&nbsp;}<br>
+                        };<br>
+                        <br>
+                        <span class="token keyword">const</span> qazo <span class="token function">=</span> <span class="token function">createFuture</span>();<br>
+                        <span class="token function">console</span>.<span class="token function">log</span>(qazo); <span class="token comment">// Criando o futuro hoje</span>
+                    </div>
+                </div>
+                
+                <div class="mt-16 flex flex-wrap justify-center gap-4 scroll-animate" style="animation-delay: 1.2s;">
+                    <a href="#contact" class="px-8 py-3 bg-white text-black font-medium rounded-lg hover:bg-gray-300 transition-transform hover:scale-105 shadow-lg">
+                        Fale Conosco
+                    </a>
+                    <a href="#process" class="px-8 py-3 border border-white text-white font-medium rounded-lg hover:bg-white hover:text-black transition-all hover:scale-105">
+                        Nosso Processo
+                    </a>
+                </div>
+                
+                <div class="mt-24 animate-float">
+                    <img src="https://placehold.co/100x100" alt="Ícone de seta para baixo indicando para rolar a página" 
+                         class="mx-auto opacity-50 hover:opacity-100 transition-opacity cursor-pointer" 
+                         onclick="window.scrollBy({ top: window.innerHeight - 100, behavior: 'smooth' })">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services Section -->
+        <section id="services" class="py-20 px-6 relative">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 scroll-animate">
+                    <span class="gradient-text">Nossos Serviços</span>
+                </h2>
+                
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl scroll-animate">
+                    Soluções completas para todas as necessidades de desenvolvimento de software.
+                </p>
+                
+                <div class="grid-layout mt-16">
+                    <!-- Frontend Card -->
+                    <div class="tech-card scroll-animate" style="animation-delay: 0.3s;">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #6e45e2, #88d3ce);">
+                            <img src="https://placehold.co/40x40" alt="Ícone representando desenvolvimento front-end com elementos de interface">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Front-end</h3>
+                        <p class="text-gray-300 mb-4">
+                            Interfaces modernas e responsivas com React, Vue.js e Next.js. Performance, acessibilidade e design impecável.
+                        </p>
+                        <ul class="space-y-2 text-gray-400">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.1s;"></span>
+                                Aplicações Web Progressivas (PWA)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.2s;"></span>
+                                Single Page Applications
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.3s;"></span>
+                                Micro Frontends
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.4s;"></span>
+                                Design Systems
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Backend Card -->
+                    <div class="tech-card scroll-animate" style="animation-delay: 0.6s;">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #ff7e5f, #feb47b);">
+                            <img src="https://placehold.co/40x40" alt="Ícone representando desenvolvimento back-end com servidores e engrenagens">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Back-end</h3>
+                        <p class="text-gray-300 mb-4">
+                            Arquitetura escalável e segura usando as melhores tecnologias do mercado. APIs robustas e alta disponibilidade.
+                        </p>
+                        <ul class="space-y-2 text-gray-400">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.15s;"></span>
+                                APIs REST & GraphQL
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.3s;"></span>
+                                Microsserviços
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.45s;"></span>
+                                Autenticação & Autorização
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.6s;"></span>
+                                Cache e Otimização
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- AI Integration Card -->
+                    <div class="tech-card scroll-animate" style="animation-delay: 0.9s;">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                            <img src="https://placehold.co/40x40" alt="Ícone representando inteligência artificial com circuito neural futurista">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Integração com IA</h3>
+                        <p class="text-gray-300 mb-4">
+                            Machine Learning, NLP e Visão Computacional integrados diretamente no seu produto digital.
+                        </p>
+                        <ul class="space-y-2 text-gray-400">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.2s;"></span>
+                                Chatbots Inteligentes
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.35s;"></span>
+                                Processamento de Linguagem Natural
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.5s;"></span>
+                                Reconhecimento de Imagens
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.65s;"></span>
+                                Sistemas de Recomendação
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Showcase -->
+        <section id="projects" class="py-20 px-6 bg-gray-900 bg-opacity-50 relative">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 scroll-animate">
+                    <span class="gradient-text">Projetos Recentes</span>
+                </h2>
+                
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl scroll-animate">Alguns dos nossos trabalhos mais impactantes.</p>
+                
+                <div class="mt-16">
+                    <!-- Project 1 -->
+                    <div class="flex flex-col md:flex-row gap-10 items-center mb-24 scroll-animate">
+                        <div class="md:w-1/2 relative">
+                            <div class="code-editor">
+                                <div class="code-header">
+                                    <div class="code-btn red"></div>
+                                    <div class="code-btn yellow"></div>
+                                    <div class="code-btn green"></div>
+                                </div>
+                                <div class="code-body">
+                                    <span class="token keyword">const</span> fintechApp <span class="token keyword">=</span> {<br>
+                                    &nbsp;&nbsp;name: <span class="token string">"NexusPay"</span>,<br>
+                                    &nbsp;&nbsp;stack: <span class="token string">"React, Node, Python, TensorFlow"</span>,<br>
+                                    &nbsp;&nbsp;features: [<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Pagamentos instantâneos"</span>,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Recomendações financeiras com IA"</span>,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="token string">"Dashboard analítico"</span><br>
+                                    &nbsp;&nbsp;]<br>
+                                    };
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-5 -right-5 w-24 h-24 border-2 border-gray-600 rounded-lg animate-float" style="animation-delay: 0.5s;"></div>
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="text-2xl font-bold mb-4">NexusPay</h3>
+                            <p class="text-gray-300 mb-6">Plataforma financeira com recomendações personalizadas de investimento utilizando aprendizado de máquina.</p>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse"></span>
+                                    Redução de 30% em taxas de inadimplência
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.15s;"></span>
+                                    +40% de engajamento dos usuários
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.3s;"></span>
+                                    Tempo de resposta abaixo de 200ms
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="flex flex-col md:flex-row-reverse gap-10 items-center mb-24 scroll-animate" style="animation-delay: 0.3s;">
+                        <div class="md:w-1/2 relative">
+                            <img src="https://placehold.co/800x500" alt="Dashboard de monitoramento de saúde com gráficos e indicadores em tempo real" 
+                                 class="w-full rounded-lg shadow-xl transform transition-all hover:scale-105">
+                            <div class="absolute -top-5 -left-5 w-20 h-20 border-2 border-gray-600 rounded-full animate-float" style="animation-delay: 0.7s;"></div>
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="text-2xl font-bold mb-4">HealthTrack AI</h3>
+                            <p class="text-gray-300 mb-6">Sistema de monitoramento de saúde com análise preditiva e alertas em tempo real usando visão computacional.</p>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse"></span>
+                                    97% de precisão na análise de exames
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.15s;"></span>
+                                    Detecção precoce de anomalias
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.3s;"></span>
+                                    Integração com dispositivos IoT
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="flex flex-col md:flex-row gap-10 items-center scroll-animate" style="animation-delay: 0.6s;">
+                        <div class="md:w-1/2 relative">
+                            <img src="https://placehold.co/800x500" alt="Aplicativo de e-learning com interface interativa e elementos 3D" 
+                                 class="w-full rounded-lg shadow-xl transform transition-all hover:scale-105">
+                            <div class="absolute -bottom-5 -left-5 w-16 h-16 border-2 border-gray-600 rounded-lg animate-pulse" style="animation-delay: 0.4s;"></div>
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="text-2xl font-bold mb-4">EduLearn 3.0</h3>
+                            <p class="text-gray-300 mb-6">Plataforma de educação adaptativa com NLP para personalização do conteúdo e gamificação.</p>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse"></span>
+                                    Aumento de 60% na retenção de aprendizado
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.15s;"></span>
+                                    Sistema de recomendações do conteúdo
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 rounded-full bg-white mr-2 animate-pulse" style="animation-delay: 0.3s;"></span>
+                                    Ambiente de aprendizado imersivo
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Process Section -->
+        <section id="process" class="py-20 px-6 relative bg-gray-900">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 scroll-animate">
+                    <span class="gradient-text">Nosso Processo</span>
+                </h2>
+                
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl scroll-animate">
+                    Metodologia ágil focada em resultados extraordinários.
+                </p>
+                
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8 scroll-animate">
+                    <div class="process-step flex flex-col items-center text-center p-6 bg-gray-800 rounded-xl hover:bg-gray-700 transition-all">
+                        <div class="number-circle w-16 h-16 rounded-full bg-white text-black flex items-center justify-center text-2xl font-bold mb-4">1</div>
+                        <h3 class="text-xl font-bold mb-3">Descoberta</h3>
+                        <p class="text-gray-300">
+                            Entendimento profundo do problema, usuários e objetivos de negócio.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step flex flex-col items-center text-center p-6 bg-gray-800 rounded-xl hover:bg-gray-700 transition-all" 
+                         style="animation-delay: 0.2s;">
+                        <div class="number-circle w-16 h-16 rounded-full bg-white text-black flex items-center justify-center text-2xl font-bold mb-4">2</div>
+                        <h3 class="text-xl font-bold mb-3">Prototipagem</h3>
+                        <p class="text-gray-300">
+                            Validação rápida de ideias através de wireframes e protótipos iterativos.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step flex flex-col items-center text-center p-6 bg-gray-800 rounded-xl hover:bg-gray-700 transition-all" 
+                         style="animation-delay: 0.4s;">
+                        <div class="number-circle w-16 h-16 rounded-full bg-white text-black flex items-center justify-center text-2xl font-bold mb-4">3</div>
+                        <h3 class="text-xl font-bold mb-3">Desenvolvimento</h3>
+                        <p class="text-gray-300">
+                            Implementação ágil com sprints, revisões e entregas contínuas.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step flex flex-col items-center text-center p-6 bg-gray-800 rounded-xl hover:bg-gray-700 transition-all" 
+                         style="animation-delay: 0.6s;">
+                        <div class="number-circle w-16 h-16 rounded-full bg-white text-black flex items-center justify-center text-2xl font-bold mb-4">4</div>
+                        <h3 class="text-xl font-bold mb-3">Otimização</h3>
+                        <p class="text-gray-300">
+                            Monitoramento, análise de dados e melhorias contínuas pós-lançamento.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Team Section -->
+        <section id="team" class="py-20 px-6 relative">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center scroll-animate">
+                    <span class="gradient-text">Nosso Time</span>
+                </h2>
+                
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto text-center scroll-animate">
+                    Especialistas apaixonados por tecnologia e inovação.
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+                    <!-- Team Member 1 -->
+                    <div class="team-card scroll-animate bg-gray-900 p-6 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-2">
+                        <div class="overflow-hidden rounded-lg mb-4">
+                            <img src="https://placehold.co/400x400" alt="Retrato de desenvolvedor front-end sorrindo com óculos em um escritório moderno" 
+                                 class="w-full h-auto rounded-lg hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="text-xl font-bold">Marcos Silva</h3>
+                        <p class="text-gray-400 mb-3">Líder de Front-end</p>
+                        <p class="text-gray-300 text-sm">
+                            Especialista em React e UX/UI com mais de 8 anos transformando designs em experiências incríveis.
+                        </p>
+                        <div class="flex mt-4 space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone GitHub em branco sobre fundo escuro">
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone LinkedIn em branco sobre fundo escuro">
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone Twitter em branco sobre fundo escuro">
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 2 -->
+                    <div class="team-card scroll-animate bg-gray-900 p-6 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-2" 
+                         style="animation-delay: 0.2s;">
+                        <div class="overflow-hidden rounded-lg mb-4">
+                            <img src="https://placehold.co/400x400" alt="Engenheira de back-end em frente a telas com código concentrada no trabalho" 
+                                 class="w-full h-auto rounded-lg hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="text-xl font-bold">Ana Lopes</h3>
+                        <p class="text-gray-400 mb-3">Arquiteta de Back-end</p>
+                        <p class="text-gray-300 text-sm">
+                            Especialista em sistemas distribuídos e arquitetura de microsserviços, apaixonada por Go e Python.
+                        </p>
+                        <div class="flex mt-4 space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone GitHub em branco sobre fundo escuro">
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone LinkedIn em branco sobre fundo escuro">
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 3 -->
+                    <div class="team-card scroll-animate bg-gray-900 p-6 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-2" 
+                         style="animation-delay: 0.4s;">
+                        <div class="overflow-hidden rounded-lg mb-4">
+                            <img src="https://placehold.co/400x400" alt="Cientista de dados analisando visualizações complexas em multiplos monitores" 
+                                 class="w-full h-auto rounded-lg hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="text-xl font-bold">Carlos Drummond</h3>
+                        <p class="text-gray-400 mb-3">Especialista em IA</p>
+                        <p class="text-gray-300 text-sm">
+                            PhD em Machine Learning com foco em NLP e Visão Computacional. Transformando dados em soluções.
+                        </p>
+                        <div class="flex mt-4 space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone GitHub em branco sobre fundo escuro">
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone LinkedIn em branco sobre fundo escuro">
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone Medium em branco sobre fundo escuro">
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 4 -->
+                    <div class="team-card scroll-animate bg-gray-900 p-6 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-2" 
+                         style="animation-delay: 0.6s;">
+                        <div class="overflow-hidden rounded-lg mb-4">
+                            <img src="https://placehold.co/400x400" alt="Designer de produto apresentando wireframes em uma mesa de reunião" 
+                                 class="w-full h-auto rounded-lg hover:scale-105 transition-transform">
+                        </div>
+                        <h3 class="text-xl font-bold">Juliana Costa</h3>
+                        <p class="text-gray-400 mb-3">Designer de Produto</p>
+                        <p class="text-gray-300 text-sm">
+                            Design thinking e UX research são suas paixões. Transforma problemas complexos em soluções simples.
+                        </p>
+                        <div class="flex mt-4 space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone Behance em branco sobre fundo escuro">
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <img src="https://placehold.co/20x20" alt="Ícone Dribbble em branco sobre fundo escuro">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-6 bg-gray-900 relative">
+            <div class="container mx-auto">
+                <div class="max-w-5xl mx-auto scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
+                        <span class="gradient-text">Vamos Construir Algo Incrível Juntos</span>
+                    </h2>
+                    
+                    <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto text-center">
+                        Pronto para transformar sua ideia em realidade? Entre em contato conosco e vamos conversar sobre seu projeto.
+                    </p>
+                    
+                    <div class="bg-gray-800 rounded-xl p-8 md:p-12 shadow-2xl">
+                        <form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="form-group">
+                                <label for="name" class="block text-gray-300 mb-2">Nome</label>
+                                <input type="text" id="name" 
+                                       class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="block text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" 
+                                       class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all">
+                            </div>
+                            
+                            <div class="form-group md:col-span-2">
+                                <label for="subject" class="block text-gray-300 mb-2">Assunto</label>
+                                <select id="subject" 
+                                        class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all">
+                                    <option value="">Selecione um assunto</option>
+                                    <option value="development">Desenvolvimento de Software</option>
+                                    <option value="ai">Soluções em IA</option>
+                                    <option value="consulting">Consultoria</option>
+                                    <option value="other">Outro</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group md:col-span-2">
+                                <label for="message" class="block text-gray-300 mb-2">Mensagem</label>
+                                <textarea id="message" rows="5" 
+                                          class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all"></textarea>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <button type="submit" 
+                                        class="px-8 py-3 bg-white text-black font-medium rounded-lg hover:bg-gray-300 transition-transform hover:scale-105 shadow-lg">
+                                    Enviar Mensagem
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Wave Separator -->
+        <div class="relative h-20 overflow-hidden" style="background: black;">
+            <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+                      fill="rgb(17, 24, 39)"></path>
+            </svg>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-gray-400 py-12 px-6">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="md:col-span-2">
+                        <h3 class="text-2xl font-bold text-white mb-4">QAZO</h3>
+                        <p class="mb-6 max-w-md">
+                            Transformando o futuro através de código inteligente e design excepcional. Soluções tecnológicas sob medida para seu negócio.
+                        </p>
+                        <div class="flex space-x-6">
+                            <a href="#" class="hover:text-white transition-colors">
+                                <img src="https://placehold.co/24x24" alt="Ícone Twitter">
+                            </a>
+                            <a href="#" class="hover:text-white transition-colors">
+                                <img src="https://placehold.co/24x24" alt="Ícone GitHub">
+                            </a>
+                            <a href="#" class="hover:text-white transition-colors">
+                                <img src="https://placehold.co/24x24" alt="Ícone LinkedIn">
+                            </a>
+                            <a href="#" class="hover:text-white transition-colors">
+                                <img src="https://placehold.co/24x24" alt="Ícone Instagram">
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-4">Links Rápidos</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
+                            <li><a href="#services" class="hover:text-white transition-colors">Serviços</a></li>
+                            <li><a href="#projects" class="hover:text-white transition-colors">Projetos</a></li>
+                            <li><a href="#process" class="hover:text-white transition-colors">Processo</a></li>
+                            <li><a href="#contact" class="hover:text-white transition-colors">Contato</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-4">Contato</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <img src="https://placehold.co/20x20" alt="Ícone email" class="mr-2">
+                                contato@qazo.dev
+                            </li>
+                            <li class="flex items-center">
+                                <img src="https://placehold.co/20x20" alt="Ícone telefone" class="mr-2">
+                                +55 11 90000-0000
+                            </li>
+                            <li class="flex items-center">
+                                <img src="https://placehold.co/20x20" alt="Ícone localização" class="mr-2">
+                                São Paulo, Brasil
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                    <p>© 2023 QAZO. Todos os direitos reservados.</p>
+                    <div class="mt-4 md:mt-0 flex space-x-6">
+                        <a href="#" class="hover:text-white transition-colors">Termos de Serviço</a>
+                        <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Scroll Animation
+        const scrollElements = document.querySelectorAll('.scroll-animate');
+        
+        const elementInView = (el) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight)
+            );
+        };
+        
+        const displayScrollElement = (element) => {
+            element.classList.add('visible');
+        };
+        
+        const hideScrollElement = (element) => {
+            element.classList.remove('visible');
+        };
+        
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el)) {
+                    displayScrollElement(el);
+                } else {
+                    hideScrollElement(el);
+                }
+            });
+        };
+        
+        // Initialize scroll animations
+        window.addEventListener('load', () => {
+            scrollElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+            handleScrollAnimation();
+        });
+        
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+        
+        // Form Submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if(!name || !email || !subject || !message) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            // Here you would typically send the form data to a server
+            // For demo purposes, we'll just show an alert
+            alert(`Obrigado pelo seu contato, ${name}! Responderemos em breve.`);
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // Animate tech cards on hover
+        const techCards = document.querySelectorAll('.tech-card');
+        techCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'scale(1.05) translateY(-10px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+        
+        // Animate process steps
+        const processSteps = document.querySelectorAll('.process-step');
+        processSteps.forEach((step, index) => {
+            step.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
 </body>
 </html>
