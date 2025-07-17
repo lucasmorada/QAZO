@@ -14,33 +14,33 @@
       color: #f5f5f5;
       overflow-x: hidden;
     }
-    .code-loader {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-family: monospace;
-      font-size: 14px;
-      background: #111;
-      padding: 10px 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,255,0,0.2);
-      color: #0f0;
-    }
-    .code-loader::after {
-      content: '';
-      display: block;
-      height: 4px;
-      background: linear-gradient(90deg, #0f0, transparent);
-      animation: loadingBar 3s infinite;
-    }
-    @keyframes loadingBar {
-      0% { width: 0%; }
-      100% { width: 100%; }
+    header {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .title-container h1 {
-      font-size: 4rem;
-      text-align: center;
+      font-size: 3rem;
       animation: fadeInUp 2s ease forwards;
+    }
+    .top-icons {
+      display: flex;
+      gap: 15px;
+    }
+    .top-icons a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5rem;
+      background: #111;
+      padding: 10px;
+      border-radius: 50%;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .top-icons a:hover {
+      background: #0ff;
+      color: #000;
+      transform: rotate(10deg) scale(1.2);
     }
     @keyframes fadeInUp {
       from { transform: translateY(50px); opacity: 0; }
@@ -49,116 +49,108 @@
     .code-animation {
       font-family: monospace;
       font-size: 16px;
-      line-height: 1.4;
-      white-space: pre;
-      color: #00ff88;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      color: #fff;
       background: #111;
       padding: 20px;
-      border-radius: 10px;
       width: 80%;
       margin: 40px auto;
+      border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,255,136,0.2);
-      animation: glow 2s ease-in-out infinite alternate;
     }
-    @keyframes glow {
-      from { box-shadow: 0 0 10px rgba(0,255,136,0.1); }
-      to { box-shadow: 0 0 30px rgba(0,255,136,0.5); }
-    }
-    .contact-section {
-      background: #111;
-      padding: 60px 20px;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.1);
+    .code-animation .keyword { color: #569cd6; }
+    .code-animation .string { color: #ce9178; }
+    .code-animation .function { color: #dcdcaa; }
+    .code-animation .variable { color: #9cdcfe; }
+    .about-section {
+      padding: 60px 10vw;
       position: relative;
     }
-    .contact-section h2 {
-      font-size: 2rem;
+    .about-section h2 {
+      font-size: 2.5rem;
       margin-bottom: 20px;
+      text-align: center;
     }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      font-size: 2rem;
+    .about-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
     }
-    .social-links a {
-      color: white;
-      transition: transform 0.3s, color 0.3s;
-    }
-    .social-links a:hover {
-      transform: scale(1.3);
-      color: #0ff;
-    }
-    .contact-section::before {
-      content: '';
-      position: absolute;
-      top: -50px;
-      left: -50px;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, #0ff3, transparent 60%);
-      filter: blur(40px);
-      z-index: 0;
-    }
-    .contact-section * {
+    .about-box {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
       position: relative;
-      z-index: 1;
+    }
+    .about-box:hover {
+      transform: scale(1.03);
+      border-color: #0ff;
+    }
+    .about-box::before {
+      content: '<>';
+      font-family: monospace;
+      color: #0ff;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 18px;
+      opacity: 0.2;
     }
     @media (max-width: 768px) {
       .code-animation { width: 95%; font-size: 14px; }
-      .social-links { flex-direction: column; gap: 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="code-loader">
-    <code>&lt;Compiling ideas...&gt;</code>
-  </div>
-
   <header>
     <div class="title-container">
       <h1>WE ARE QAZO</h1>
     </div>
-  </header>
-
-  <div class="code-animation" id="typing">
-    // QAZO Terminal
-    const mission = "Innovate beyond limits";
-    const team = ["Frontend", "Backend", "AI", "Cloud"];
-    
-    function buildFuture() {
-      return team.map(area => `Creating excellence in ${area}`);
-    }
-  </div>
-
-  <section class="contact-section">
-    <h2>Trabalhe Conosco</h2>
-    <p>Estamos buscando desenvolvedores apaixonados para transformar o mundo conosco.</p>
-    <div class="social-links">
+    <div class="top-icons">
       <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i></a>
       <a href="https://www.instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="mailto:youremail@example.com"><i class="fas fa-envelope"></i></a>
     </div>
+  </header>
+
+  <div class="code-animation" id="typing"></div>
+
+  <section class="about-section">
+    <h2>O que fazemos na QAZO</h2>
+    <div class="about-content">
+      <div class="about-box">
+        <h3>💡 Inovação Inteligente</h3>
+        <p>Utilizamos IA, algoritmos personalizados e interfaces futuristas para transformar ideias em produtos reais e funcionais.</p>
+      </div>
+      <div class="about-box">
+        <h3>🧠 Desenvolvimento Estratégico</h3>
+        <p>Planejamos soluções desde o backend até o UX, integrando segurança, performance e escalabilidade.</p>
+      </div>
+      <div class="about-box">
+        <h3>🚀 Resultados Tangíveis</h3>
+        <p>Criamos plataformas que impactam usuários e geram valor real para negócios digitais modernos.</p>
+      </div>
+    </div>
   </section>
 
   <script>
-    // typing effect
-    const lines = [
-      "// QAZO Terminal",
-      "const mission = \"Innovate beyond limits\";",
-      "const team = [\"Frontend\", \"Backend\", \"AI\", \"Cloud\"];",
-      "function buildFuture() {",
-      "  return team.map(area => `Creating excellence in ${area}`);",
-      "}"
-    ];
-
     const el = document.getElementById('typing');
-    el.textContent = '';
-
+    const lines = [
+      "<span class='keyword'>const</span> <span class='variable'>qazo</span> = {",
+      "  <span class='function'>mission</span>: <span class='string'>'code the impossible'</span>,",
+      "  <span class='function'>technologies</span>: [<span class='string'>'AI'</span>, <span class='string'>'Cloud'</span>, <span class='string'>'UX'</span>],",
+      "  <span class='function'>build</span>: () => <span class='string'>'futuristic experiences'</span>,",
+      "};"
+    ];
     let i = 0;
     function typeLine() {
       if (i < lines.length) {
-        el.textContent += lines[i] + '\n';
+        el.innerHTML += lines[i] + '<br>';
         i++;
         setTimeout(typeLine, 400);
       }
