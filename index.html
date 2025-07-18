@@ -409,40 +409,119 @@
 
         <!-- SOBRE NÓS -->
 <!-- SOBRE NÓS -->
-<section class="relative w-full px-6 py-20 bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-down">Quem Somos</h2>
+<!-- SOBRE NÓS ESTILIZADO -->
+<section class="relative w-full px-6 py-32 bg-black text-white overflow-hidden font-sans">
+  <!-- Canvas de partículas -->
+  <canvas id="particles-bg" class="absolute inset-0 z-0"></canvas>
 
-    <div class="max-w-3xl mx-auto mb-10 space-y-6">
-      <p class="text-lg md:text-xl font-medium text-white animate-fadeUp opacity-0" style="animation-delay: 0.2s;">
-        A <strong>QAZO</strong> surgiu em <strong>2024</strong>, com o objetivo de reunir desenvolvedores criativos, ágeis e focados em resultados.
-        Fundada por <strong>Lucas Dias</strong>, a ideia nasceu da necessidade de conectar empresas e pessoas com profissionais preparados
-        para tirar projetos do papel — de forma simples, moderna e eficiente.
+  <div class="relative z-10 max-w-5xl mx-auto text-center">
+    <h2 class="text-5xl md:text-6xl font-extrabold mb-8 animate-fade-in-down tracking-tight leading-tight font-mono">
+      Quem Somos
+    </h2>
+
+    <div class="space-y-6 text-lg md:text-xl text-gray-200 font-light">
+      <p class="animate-fadeUp opacity-0" style="animation-delay: 0.2s;">
+        A <span class="font-bold text-white">QAZO</span> surgiu em <span class="font-semibold text-white">2024</span>, quando nosso CEO teve a visão de reunir os programadores mais criativos e ousados para criar algo único.
       </p>
-      <p class="text-lg md:text-xl font-medium text-white animate-fadeUp opacity-0" style="animation-delay: 0.4s;">
-        Funcionamos como um <strong>hub de talentos</strong>: você entra em contato, nos conta o que precisa, e nós cuidamos de tudo —
-        <strong>desde a estruturação da ideia até a entrega final</strong>, com o profissional mais adequado para o seu projeto.
+      <p class="animate-fadeUp opacity-0" style="animation-delay: 0.4s;">
+        Nossa ideia sempre foi fugir do padrão. A gente não cria só sites: criamos <span class="font-semibold text-white">experiências digitais</span> ousadas e inesquecíveis para empresas, ideias, produtos e pessoas.
       </p>
-      <p class="text-lg md:text-xl font-medium text-white animate-fadeUp opacity-0" style="animation-delay: 0.6s;">
-        Somos especialistas em <strong>sites modernos, responsivos e bem planejados</strong>, feitos sob medida para negócios,
-        produtos e marcas pessoais.
+      <p class="animate-fadeUp opacity-0" style="animation-delay: 0.6s;">
+        Hoje, a QAZO é um hub com diversos profissionais que recebem os projetos certos para o seu estilo. Você entra em contato, e nós conectamos com a equipe ideal.
       </p>
-      <p class="text-lg md:text-xl font-medium text-white animate-fadeUp opacity-0" style="animation-delay: 0.8s;">
-        Se você quer criar algo do zero ou melhorar o que já tem, <strong>conte com a QAZO</strong>.
+      <p class="animate-fadeUp opacity-0" style="animation-delay: 0.8s;">
+        É assim que transformamos <span class="font-semibold text-white">ideias em soluções reais</span> — com agilidade, personalidade e criatividade.
       </p>
     </div>
 
-    <!-- QUER FAZER PARTE -->
-    <div class="max-w-3xl mx-auto mb-10 space-y-4">
-      <h3 class="text-2xl font-semibold animate-fadeUp opacity-0" style="animation-delay: 1s;">Quer fazer parte?</h3>
-      <p class="text-lg md:text-xl font-medium text-white animate-fadeUp opacity-0" style="animation-delay: 1.2s;">
-        Se você é programador, trabalha com <strong>design, UX ou tecnologia em geral</strong> — e gosta de
-        <strong>resolver problemas com criatividade e código</strong> — pode se juntar à nossa equipe.
+    <!-- Chamada para programadores -->
+    <div class="mt-14">
+      <h3 class="text-2xl md:text-3xl font-semibold mb-4 animate-fade-in-down font-mono">É programador e quer fazer parte?</h3>
+      <p class="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up">
+        Junte-se ao time de mentes criativas da <span class="font-bold text-white">QAZO</span> e receba projetos incríveis para colocar suas habilidades em ação.
       </p>
-      <p class="text-lg md:text-xl font-medium text-white animate-fadeUp opacity-0" style="animation-delay: 1.4s;">
-        A QAZO distribui projetos conforme o perfil ideal de cada profissional, então aqui você trabalha com o que sabe fazer de melhor.
-      </p>
+      <a href="equipe.html" class="inline-block px-10 py-4 bg-white text-black font-semibold rounded-full shadow-xl hover:scale-105 transform transition duration-300 animate-fade-in-up">
+        Entrar para a Equipe
+      </a>
     </div>
+  </div>
+</section>
+
+<!-- Script de partículas no fundo -->
+<script>
+  const canvas = document.getElementById("particles-bg");
+  const ctx = canvas.getContext("2d");
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = document.querySelector("section").offsetHeight;
+  }
+
+  function createParticles(count) {
+    particles = [];
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.5,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255, 255, 255, 0.07)";
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    createParticles(100);
+  });
+
+  resizeCanvas();
+  createParticles(100);
+  animateParticles();
+</script>
+
+<!-- Tailwind (certifique-se de já ter incluído no seu projeto) -->
+<style>
+  .animate-fadeUp {
+    animation: fadeUp 1s ease forwards;
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease forwards;
+  }
+  .animate-fade-in-down {
+    animation: fadeInDown 1s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 
     <!-- Botão -->
     <a href="equipe.html" class="inline-block px-8 py-3 bg-white text-black font-semibold rounded-xl shadow-lg hover:scale-105 transform transition duration-300 animate-fade-in-up" style="animation-delay: 1.6s;">
