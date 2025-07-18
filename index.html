@@ -403,6 +403,123 @@
 
             </div>
         </section>
+
+        <!-- SOBRE A QAZO - Seção completa com botão -->
+<section class="py-28 px-6 bg-[#0f0f0f] text-white relative overflow-hidden scroll-animate">
+  <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-[#1c1c1c] to-[#0f0f0f] pointer-events-none animate-gradient"></div>
+
+  <div class="max-w-5xl mx-auto text-center relative z-10">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-down">SOMOS A QAZO</h2>
+    <p class="text-lg md:text-xl mb-10 text-gray-300 animate-fade-up delay-200">
+      Um hub de programadores insanos prontos pra transformar qualquer ideia em realidade.
+      A QAZO conecta talentos e distribui projetos de sites e sistemas para quem busca qualidade, velocidade e inovação.
+      Nós recebemos, organizamos e entregamos com perfeição.
+    </p>
+
+    <a href="/equipe.html"
+       class="inline-block bg-white text-black font-bold py-3 px-6 rounded-full shadow-xl hover:bg-gray-300 transition-all duration-300 animate-fade-up delay-400">
+      Quero entrar para a equipe
+    </a>
+  </div>
+</section>
+
+<!-- NÚMEROS COM CONTADOR -->
+<section class="bg-black py-24 px-6 text-white relative overflow-hidden scroll-animate">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center relative z-10">
+
+    <div class="animate-fade-up delay-200">
+      <div class="text-5xl font-bold text-white" data-target="87">0</div>
+      <p class="text-gray-400 mt-2">Sites Entregues</p>
+    </div>
+
+    <div class="animate-fade-up delay-400">
+      <div class="text-5xl font-bold text-white" data-target="12">0</div>
+      <p class="text-gray-400 mt-2">Colaboradores</p>
+    </div>
+
+    <div class="animate-fade-up delay-600">
+      <div class="text-5xl font-bold text-white" data-target="154">0</div>
+      <p class="text-gray-400 mt-2">Projetos Gerenciados</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- style -->
+<style>
+  .animate-gradient {
+    animation: gradientMove 10s ease infinite alternate;
+  }
+
+  @keyframes gradientMove {
+    0% { transform: translateY(0); opacity: 0.7; }
+    100% { transform: translateY(-30px); opacity: 1; }
+  }
+
+  .animate-fade-down {
+    animation: fadeDown 1s ease forwards;
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-400 { animation-delay: 0.4s; }
+  .delay-600 { animation-delay: 0.6s; }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<!-- script contador -->>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll('[data-target]');
+    const speed = 200;
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const inc = Math.ceil(target / speed);
+
+            if (count < target) {
+              counter.innerText = count + inc;
+              setTimeout(updateCount, 30);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => {
+      observer.observe(counter);
+    });
+  });
+</script>
         
         <!-- Services Section -->
         <section id="services" class="py-20 px-6 relative">
