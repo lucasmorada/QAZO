@@ -189,6 +189,23 @@
             background-clip: text;
             color: transparent;
         }
+
+        @keyframes slide-in {
+        0% {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        }
+
+        .animate-slide-in {
+            opacity: 0;
+            animation: slide-in 0.8s ease-out forwards;
+        }
+
     </style>
 </head>
 <body class="antialiased">
@@ -247,9 +264,12 @@
         <!-- Hero Section -->
         <section class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden px-6">
             <div class="container mx-auto text-center">
-                <h1 class="text-5xl md:text-7xl font-bold mb-8 animate-slide-in" style="animation-delay: 0.3s;">
-                    <span class="gradient-text">WE ARE QAZO</span>
+                <h1 class="text-5xl md:text-7xl font-bold mb-8 flex flex-wrap justify-center">
+                  <span class="gradient-text animate-slide-in" style="animation-delay: 0.2s;">WE&nbsp;</span>
+                  <span class="gradient-text animate-slide-in" style="animation-delay: 0.5s;">ARE&nbsp;</span>
+                  <span class="gradient-text animate-slide-in" style="animation-delay: 0.8s;">QAZO</span>
                 </h1>
+
                 
                 <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 scroll-animate" style="animation-delay: 0.6s;">
                     Transformando ideias em realidade digital com soluções inovadoras de front-end, back-end e integração com IA.
@@ -679,7 +699,7 @@
                         <h4 class="text-lg font-semibold text-white mb-4">Contato</h4>
                         <ul class="space-y-2">
                             <li class="flex items-center">
-                                <img src="gmail.png" alt="Ícone gmail" class="mr-2">
+                                <img src="gmail.png" alt="Ícone gmail" class="w-5 h-5 mr-5">
                                 <a href="#" class="hover:text-white transition-colors">contato@qazo.dev</a>
                             </li>
                             <li class="flex items-center">
