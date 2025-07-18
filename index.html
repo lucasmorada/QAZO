@@ -219,7 +219,17 @@
 
         .animate-slide-in {
            animation: slide-in 1s ease forwards;
-       }
+        }
+
+        #sticky-title nav {
+           position: relative; /* para o absolute funcionar dentro do nav */
+        }
+
+        #sticky-title nav h1 {
+           position: absolute;
+           left: 50%;
+           transform: translateX(-50%);
+        }
 
     </style>
 </head>
