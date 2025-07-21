@@ -510,62 +510,181 @@
 
     <!-- CTA -->
 
-   <!-- CONTAINER GERAL -->
-<div class="relative bg-black text-white p-8 rounded-3xl mt-20 overflow-hidden shadow-2xl border border-white/10 max-w-4xl mx-auto">
-  
-  <!-- LOGO PYTHON -->
-  <div class="flex justify-center mb-4">
-    <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python" class="h-12">
+   <!-- Bloco visual estilo VS Code com animação -->
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<style>
+  .code-box {
+    font-family: 'Fira Code', monospace;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .header {
+    background: #252526;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+  }
+
+  .circles {
+    display: flex;
+    gap: 8px;
+  }
+
+  .circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .red { background: #ff5f56; }
+  .yellow { background: #ffbd2e; }
+  .green { background: #27c93f; }
+
+  .filename {
+    flex: 1;
+    text-align: center;
+    color: #aaa;
+    font-size: 13px;
+  }
+
+  .code-area {
+    padding: 20px;
+  }
+
+  .line {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .num {
+    width: 30px;
+    color: #555;
+    text-align: right;
+    padding-right: 10px;
+    user-select: none;
+  }
+
+  .keyword { color: #569cd6; }
+  .string { color: #ce9178; }
+  .comment { color: #6a9955; }
+  .function { color: #dcdcaa; }
+  .variable { color: #9cdcfe; }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: #d4d4d4;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .btn {
+    margin-top: 20px;
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    float: right;
+    display: none;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn:hover {
+    background: #2ea043;
+    transform: translateY(-1px);
+  }
+
+  .success {
+    color: #3fb950;
+    margin-top: 20px;
+    font-size: 14px;
+    display: none;
+  }
+</style>
+
+<div class="code-box">
+  <div class="header">
+    <div class="circles">
+      <div class="circle red"></div>
+      <div class="circle yellow"></div>
+      <div class="circle green"></div>
+    </div>
+    <div class="filename">recrutamento.py</div>
   </div>
-
-  <!-- CÓDIGO TYPING -->
-  <pre id="typing-code" class="text-left font-mono text-sm md:text-base leading-relaxed opacity-80 whitespace-pre-wrap min-h-[250px]"></pre>
-
-  <!-- BOTÃO DE COMMIT -->
-  <div class="mt-8 flex justify-center">
-    <a href="equipe.html" class="bg-green-600 hover:bg-green-700 text-white font-mono px-6 py-3 rounded-lg shadow-lg transition duration-300">
-      🔁 Commit: Entrar para a equipe
-    </a>
+  <div class="code-area">
+    <div class="line">
+      <span class="num">1</span>
+      <div><span class="keyword">mensagem</span> = <span class="string">"</span><span id="typing"></span><span class="cursor"></span><span class="string">"</span></div>
+    </div>
+    <div id="code-block" style="display:none;">
+      <div class="line"><span class="num">2</span><div><span class="comment"># Você está pronto para o próximo desafio?</span></div></div>
+      <div class="line"><span class="num">3</span><div><span class="keyword">time</span> = <span class="function">Equipe</span>()</div></div>
+      <div class="line"><span class="num">4</span><div><span class="keyword">if</span> <span class="variable">voce</span>.<span class="function">tem_paixao_por_codigo</span>():</div></div>
+      <div class="line"><span class="num">5</span><div>    <span class="variable">time</span>.<span class="function">adicionar</span>(<span class="variable">voce</span>)</div></div>
+      <div class="line"><span class="num">6</span><div>    <span class="function">print</span>(<span class="string">"Bem-vindo à QAZO! 🚀"</span>)</div></div>
+      <button class="btn" id="commitBtn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zm.75 4a.75.75 0 00-1.5 0v5a.75.75 0 001.5 0V4zm0 8a.75.75 0 00-1.5 0v.5a.75.75 0 001.5 0v-.5z" fill="currentColor"/>
+        </svg>
+        Entrar para a equipe
+      </button>
+      <div class="success" id="successMsg">Convite enviado! Em breve entraremos em contato. ✅</div>
+    </div>
   </div>
 </div>
 
-<!-- SCRIPT TYPING PYTHON -->
 <script>
-const codeLines = [
-  "# QAZO Dev Recruitment Script 🐍",
-  "def recrutar_dev(dev):",
-  "    if dev.inovador and dev.ama_codigo:",
-  '        print("Bem-vindo à QAZO, dev! 🚀")',
-  "        equipe.append(dev)",
-  "    else:",
-  '        print("Continue praticando. Seu momento vai chegar!")',
-  "",
-  "dev_atual = get_dev()",
-  "recrutar_dev(dev_atual)"
-];
+  const text = "Olá, desenvolvedor criativo!";
+  const typingEl = document.getElementById("typing");
+  const cursor = document.querySelector(".cursor");
+  const block = document.getElementById("code-block");
+  const commitBtn = document.getElementById("commitBtn");
+  const success = document.getElementById("successMsg");
 
-let i = 0;
-const pre = document.getElementById("typing-code");
-
-function typeLine() {
-  if (i < codeLines.length) {
-    pre.innerHTML += syntaxHighlight(codeLines[i]) + "\n";
-    i++;
-    setTimeout(typeLine, 400);
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      typingEl.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 60);
+    } else {
+      setTimeout(() => {
+        block.style.display = "block";
+        commitBtn.style.display = "inline-flex";
+      }, 500);
+    }
   }
-}
 
-// Destacar sintaxe Python estilo VS Code
-function syntaxHighlight(line) {
-  return line
-    .replace(/(#.*)/g, '<span style="color:#6A9955;">$1</span>') // Comentários
-    .replace(/(def|if|else|print|append)/g, '<span style="color:#569CD6;">$1</span>') // Palavras-chave
-    .replace(/(".*?")/g, '<span style="color:#CE9178;">$1</span>') // Strings
-    .replace(/(True|False|None)/g, '<span style="color:#569CD6;">$1</span>') // Booleanos
-    .replace(/(dev|equipe|get_dev)/g, '<span style="color:#4EC9B0;">$1</span>'); // Variáveis/Funções custom
-}
+  commitBtn.addEventListener("click", () => {
+    commitBtn.disabled = true;
+    commitBtn.innerHTML = "✔ Convite enviado";
+    success.style.display = "block";
+  });
 
-typeLine();
+  window.addEventListener("load", () => {
+    setTimeout(type, 800);
+  });
 </script>
 
   </div>
@@ -1314,6 +1433,17 @@ document.addEventListener("DOMContentLoaded", () => {
          container.appendChild(stream);
          }
        });
+
+  window.addEventListener("scroll", function () {
+    const sticky = document.getElementById("sticky-title");
+    if (window.scrollY > 100) {
+      sticky.classList.remove("opacity-0", "pointer-events-none");
+      sticky.classList.add("opacity-100");
+    } else {
+      sticky.classList.add("opacity-0", "pointer-events-none");
+      sticky.classList.remove("opacity-100");
+    }
+  });
 
    </script>
 </body>
