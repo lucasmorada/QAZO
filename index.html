@@ -310,6 +310,15 @@
        .animate-slide-right {
            animation: slide-right 0.6s cubic-bezier(0.7, 0, 0.3, 1) forwards;
       }
+      
+       .process-step {
+           transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+       .process-step:hover {
+           transform: translateY(-10px);
+           box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1); /* efeito de luz sutil */
+      }
 
     </style>
 </head>
@@ -975,7 +984,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     Metodologia ágil focada em resultados extraordinários.
                 </p>
                 
-                <div class="mt-16 grid grid-cols-1 px-4 md:grid-cols-4 gap-8 scroll-animate transform transition-all hover:scale-105 object-cover">
+                <div class="mt-16 grid grid-cols-1 px-4 md:grid-cols-4 gap-8 scroll-animate">
                     <div class="process-step flex flex-col items-center text-center p-6 bg-gray-800 rounded-xl hover:bg-gray-700 transition-all">
                         <div class="number-circle w-16 h-16 rounded-full bg-white text-black flex items-center justify-center text-2xl font-bold mb-4">1.</div>
                         <h3 class="text-xl font-bold mb-3">Imersão com o cliente</h3>
