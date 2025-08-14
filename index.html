@@ -1024,61 +1024,70 @@ document.addEventListener("DOMContentLoaded", () => {
         </section>
         
         <!-- Contact Section -->
-        <section id="contact" class="py-20 px-6 bg-gray-900 relative">
-          <div class="binary-background"></div>
-            <div class="container mx-auto">
-                <div class="max-w-5xl mx-auto scroll-animate">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
-                        <span class="gradient-text">Vamos Construir Algo Incrível Juntos</span>
-                    </h2>
-                    
-                    <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto text-center">
-                        Pronto para transformar sua ideia em realidade? Entre em contato conosco e vamos conversar sobre seu projeto.
-                    </p>
-                    
-                    <div class="bg-gray-800 rounded-xl p-8 md:p-12 shadow-2xl">
-                        <form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="form-group">
-                                <label for="name" class="block text-gray-300 mb-2">Nome</label>
-                                <input type="text" id="name" 
-                                       class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email" class="block text-gray-300 mb-2">Email</label>
-                                <input type="email" id="email" 
-                                       class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all">
-                            </div>
-                            
-                            <div class="form-group md:col-span-2">
-                                <label for="subject" class="block text-gray-300 mb-2">Assunto</label>
-                                <select id="subject" 
-                                        class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all">
-                                    <option value="">Selecione um assunto</option>
-                                    <option value="development">Desenvolvimento de Software</option>
-                                    <option value="ai">Soluções em IA</option>
-                                    <option value="consulting">Consultoria</option>
-                                    <option value="other">Outro</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group md:col-span-2">
-                                <label for="message" class="block text-gray-300 mb-2">Mensagem</label>
-                                <textarea id="message" rows="5" 
-                                          class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all"></textarea>
-                            </div>
-                            
-                            <div class="md:col-span-2">
-                                <button type="submit" 
-                                        class="px-8 py-3 bg-white text-black font-medium rounded-lg hover:bg-gray-300 transition-transform hover:scale-105 shadow-lg">
-                                    Enviar Mensagem
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section id="contact" class="py-20 px-6 bg-gray-900 relative">
+  <div class="binary-background"></div>
+  <div class="container mx-auto">
+    <div class="max-w-5xl mx-auto scroll-animate">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
+        <span class="gradient-text">Vamos Construir Algo Incrível Juntos</span>
+      </h2>
+
+      <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto text-center">
+        Pronto para transformar sua ideia em realidade? Entre em contato conosco e vamos conversar sobre seu projeto.
+      </p>
+
+      <div class="bg-gray-800 rounded-xl p-8 md:p-12 shadow-2xl">
+        <form action="https://formspree.io/f/xblkbaza" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Evita captcha -->
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="form-group">
+            <label for="name" class="block text-gray-300 mb-2">Nome</label>
+            <input type="text" id="name" name="name"
+                   class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all"
+                   required>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="block text-gray-300 mb-2">Email</label>
+            <input type="email" id="email" name="email"
+                   class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all"
+                   required>
+          </div>
+
+          <div class="form-group md:col-span-2">
+            <label for="subject" class="block text-gray-300 mb-2">Assunto</label>
+            <select id="subject" name="subject"
+                    class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all"
+                    required>
+              <option value="">Selecione um assunto</option>
+              <option value="development">Desenvolvimento de Software</option>
+              <option value="ai">Soluções em IA</option>
+              <option value="consulting">Consultoria</option>
+              <option value="other">Outro</option>
+            </select>
+          </div>
+
+          <div class="form-group md:col-span-2">
+            <label for="message" class="block text-gray-300 mb-2">Mensagem</label>
+            <textarea id="message" name="message" rows="5"
+                      class="w-full bg-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white transition-all"
+                      required></textarea>
+          </div>
+
+          <div class="md:col-span-2">
+            <button type="submit"
+                    class="px-8 py-3 bg-white text-black font-medium rounded-lg hover:bg-gray-300 transition-transform hover:scale-105 shadow-lg">
+              Enviar Mensagem
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
         
         <!-- Wave Separator -->
         <div class="relative h-20 overflow-hidden" style="background: black;">
